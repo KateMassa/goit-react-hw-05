@@ -1,0 +1,8 @@
+.reviewList {
+  display: flex;
+  column-gap: 24px;
+}
+
+.reviewListItem {
+  flex-basis: 120px;
+}

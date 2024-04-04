@@ -1,17 +1,38 @@
-import { Routes, Route } from "react-router-dom";
-import MovieSearch from "../../components/MovieSearch/MovieSearch";
-import MoviesPage from "../MoviesPage/MoviesPage";
+import { useEffect, useState } from "react";
+import { getTrendingMovies } from "/src/components/config";
+import MovieList from "../../components/MovieList/MovieList";
+import Loader from "../../components/Loader/Loader";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
 const HomePage = () => {
-  return (
-    <main>
-      <h1>CineHunt</h1>
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [movies, setMovies] = useState([]);
 
-      <Routes>
-        <Route path="/movies" element={<MoviesPage />} />
-        <Route path="/moviesSearch" element={<MovieSearch />} />
-      </Routes>
-    </main>
+  useEffect(() => {
+    const fetchTrendingMovies = async () => {
+      try {
+        setLoading(true);
+        setError(false);
+        const trendingMovies = await getTrendingMovies();
+        setMovies(trendingMovies);
+      } catch (error) {
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTrendingMovies();
+  }, []);
+
+  return (
+    <div>
+      <h1>Trending today</h1>
+      {movies.length > 0 && <MovieList movies={movies} />}
+      {loading && <Loader />}
+      {error && <ErrorMessage />}
+    </div>
   );
 };
 
