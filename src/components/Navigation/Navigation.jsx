@@ -12,7 +12,7 @@ const Navigation = () => {
       <NavLink to="/" className={buildLinkClass}>
         Home
       </NavLink>
-      <NavLink to="/moviesPage" className={buildLinkClass}>
+      <NavLink to="/movies" className={buildLinkClass}>
         Movies
       </NavLink>
     </nav>

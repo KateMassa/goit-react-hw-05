@@ -1,23 +1,13 @@
-import { useState } from "react";
-import { toast } from "react-hot-toast";
 import css from "./MovieSearch.module.css";
 
-const MovieSearch = ({ onSearch }) => {
-  const [query, setQuery] = useState("");
-
-  const handleSubmit = (event) => {
+const MovieSearch = ({ updateQueryParams }) => {
+  function handleSubmit(event) {
     event.preventDefault();
-    if (!query.trim()) {
-      toast.error("Search term required!");
-      return;
-    }
-
-    onSearch(query);
-    setQuery("");
-  };
+    updateQueryParams(event.currentTarget.elements.query.value);
+  }
 
   return (
-    <div>
+    <div className={css.searchContainer}>
       <form onSubmit={handleSubmit}>
         <div className={css.inputWrapper}>
           <input
@@ -27,8 +17,6 @@ const MovieSearch = ({ onSearch }) => {
             autoComplete="off"
             autoFocus
             placeholder="Search movies"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
           />
           <button className={css.searchButton} type="submit">
             Search

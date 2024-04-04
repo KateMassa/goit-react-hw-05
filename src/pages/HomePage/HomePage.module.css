@@ -1,8 +1,8 @@
-.appContainer {
-  max-width: 1280px;
+.homeContainer {
   display: flex;
   flex-direction: column;
   padding: 20px 0;
   margin: 0;
+  color: rgb(33, 32, 58);
   background-color: aquamarine;
 }

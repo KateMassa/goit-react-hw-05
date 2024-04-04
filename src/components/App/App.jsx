@@ -16,7 +16,7 @@ const MovieCast = lazy(() => import("../MovieCast/MovieCast"));
 const MovieReviews = lazy(() => import("../MovieReviews/MovieReviews"));
 const App = () => {
   return (
-    <div className={css.container}>
+    <div className={css.appContainer}>
       <Navigation />
 
       <Suspense fallback={<b>Loading...</b>}>

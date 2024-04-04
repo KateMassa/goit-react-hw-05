@@ -1,3 +1,10 @@
+.searchContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+}
+
 .inputWrapper {
   position: relative;
 }
@@ -12,13 +19,14 @@
 }
 
 .searchButton {
-  background-color: transparent;
-  border-radius: 8px;
+  background-color: aquamarine;
+  border: 1px solid rgb(33, 32, 58);
+  border-radius: 4px;
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute;
-  font-size: 12px;
+  font-size: 10px;
   top: 50%;
   right: 10px;
   transform: translateY(-50%);
