@@ -1,26 +1,26 @@
 import { useState } from "react";
 import axios from "axios";
-// import css from "./MovieSearch.module.css";
+import { API_KEY } from "../config";
 
-const API_KEY = "2102a13528dc91350ddddde3cdd97d0e";
-const MovieSearch = () => {
+const MovieSearch = ({ onSearch }) => {
   const [query, setQuery] = useState("");
-  const [movies, setMovies] = useState([]);
 
-  const searchMovies = async () => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     try {
       const response = await axios.get(
-        `https://api.themoviedb.org/3/search/movie`,
+        "https://api.themoviedb.org/3/search/movie",
         {
           params: {
             api_key: API_KEY,
+            language: "en-US",
             query: query,
           },
         }
       );
-      setMovies(response.data.results);
+      onSearch(response.data.results);
     } catch (error) {
-      console.error("Error fetching movies:", error);
+      console.error("Error searching movies:", error);
     }
   };
 
@@ -28,23 +28,11 @@ const MovieSearch = () => {
     setQuery(event.target.value);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    searchMovies();
-  };
-
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input type="text" value={query} onChange={handleChange} />
-        <button type="submit">Search</button>
-      </form>
-      <ul>
-        {movies.map((movie) => (
-          <li key={movie.id}>{movie.title}</li>
-        ))}
-      </ul>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <input type="text" value={query} onChange={handleChange} />
+      <button type="submit">Search</button>
+    </form>
   );
 };
 
