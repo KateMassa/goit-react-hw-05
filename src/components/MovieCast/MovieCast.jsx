@@ -31,7 +31,7 @@ const MovieCast = () => {
 
   return (
     <>
-      {actors.length > 0 && (
+      {actors.length > 0 ? (
         <ul className={css.actorList}>
           {actors.map((actor) => (
             <li key={actor.id} className={css.actorListItem}>
@@ -39,6 +39,8 @@ const MovieCast = () => {
             </li>
           ))}
         </ul>
+      ) : (
+        <p>Information about actors is not available.</p>
       )}
       {loading && <Loader />}
       {error && <ErrorMessage />}
